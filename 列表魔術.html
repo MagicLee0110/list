@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<title>物品列表</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
+  
+  #container {
+    max-width: 100%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  #inputSection {
+    text-align: center;
+  }
+
+  #numberInput {
+    width: 200px;
+    height: 40px;
+    font-size: 18px;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+  }
+
+  .numberButton {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    margin: 5px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .numberButton:hover {
+    background-color: #2980b9;
+  }
+
+  #outputSection {
+    display: none;
+    margin-top: 20px;
+  }
+
+  #itemList {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  #itemList li {
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+
+  .buttonContainer {
+    margin-top: 10px;
+  }
+
+  .buttonContainer button {
+    width: 120px;
+    height: 40px;
+    font-size: 18px;
+    margin: 5px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  #resetButton {
+    background-color: #e74c3c;
+    color: #fff;
+  }
+
+  #resetButton:hover {
+    background-color: #c0392b;
+  }
+
+  #convertButton {
+    background-color: #27ae60;
+    color: #fff;
+  }
+
+  #convertButton:hover {
+    background-color: #219d54;
+  }
+</style>
+</head>
+<body>
+
+<div id="container">
+  <div id="inputSection">
+    <h2>請輸入密碼</h2>
+    <input type="tel" id="numberInput" placeholder="請輸入數字（0-9）">
+    <br>
+    <button class="numberButton" onclick="addNumber(1)">1</button>
+    <button class="numberButton" onclick="addNumber(2)">2</button>
+    <button class="numberButton" onclick="addNumber(3)">3</button>
+    <button class="numberButton" onclick="addNumber(4)">4</button>
+    <button class="numberButton" onclick="addNumber(5)">5</button>
+    <button class="numberButton" onclick="addNumber(6)">6</button>
+    <button class="numberButton" onclick="addNumber(7)">7</button>
+    <button class="numberButton" onclick="addNumber(8)">8</button>
+    <button class="numberButton" onclick="addNumber(9)">9</button>
+    <button class="numberButton" onclick="addNumber(0)">0</button>
+    <br>
+    <div class="buttonContainer">
+      <button id="resetButton" onclick="resetInput()">重新輸入</button>
+      <button id="convertButton" onclick="convertItem()">進入列表</button>
+    </div>
+  </div>
+
+  <div id="outputSection">
+    <ul id="itemList">
+      <li>1: 撲克牌</li>
+      <li>2: 橡皮筋</li>
+      <li>3: 信用卡</li>
+      <li>4: 耳機</li>
+      <li>5: 筆記本</li>
+      <li>6: 便利貼</li>
+      <li>7: 口罩</li>
+      <li>8: 鑰匙</li>
+      <li>9: 手機</li>
+      <li>10: 水壺</li>
+      <li>11: 手錶</li>
+      <li>12: 手環</li>
+      <li>13: 耳環</li>
+      <li>14: 衛生紙</li>
+      <li>15: 錢包</li>
+      <li>16: 眼鏡</li>
+      <li>17: 戒指</li>
+      <li>18: 麥克筆</li>
+    </ul>
+  </div>
+</div>
+
+<script>
+function addNumber(num) {
+  document.getElementById("numberInput").value += num;
+}
+
+function resetInput() {
+  document.getElementById("numberInput").value = "";
+}
+
+function convertItem() {
+  var numberInput = document.getElementById("numberInput").value;
+  var itemList = document.getElementById("itemList").getElementsByTagName("li");
+  
+  // 判斷輸入是否合法
+  if (numberInput >= 1 && numberInput <= itemList.length) {
+    // 將對應的物品替換為"項鍊"
+    itemList[numberInput - 1].textContent = numberInput + ": 項鍊";
+    // 顯示第二部分
+    document.getElementById("inputSection").style.display = "none";
+    document.getElementById("outputSection").style.display = "block";
+  } else {
+    alert("請輸入有效的數字（1-18）");
+  }
+}
+</script>
+
+</body>
+</html>
