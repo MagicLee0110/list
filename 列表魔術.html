@@ -33,6 +33,9 @@
     font-size: 18px;
     padding: 5px 10px;
     margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
   }
 
   .numberButton {
@@ -66,6 +69,13 @@
     margin-bottom: 5px;
   }
 
+  #itemListTitle {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
   .buttonContainer {
     margin-top: 10px;
   }
@@ -78,6 +88,7 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    outline: none;
   }
 
   #resetButton {
@@ -124,25 +135,26 @@
   </div>
 
   <div id="outputSection">
+    <h2 id="itemListTitle">物品列表</h2>
     <ul id="itemList">
-      <li>1: 撲克牌</li>
-      <li>2: 橡皮筋</li>
-      <li>3: 信用卡</li>
-      <li>4: 耳機</li>
-      <li>5: 筆記本</li>
-      <li>6: 便利貼</li>
-      <li>7: 口罩</li>
-      <li>8: 鑰匙</li>
-      <li>9: 手機</li>
-      <li>10: 水壺</li>
-      <li>11: 手錶</li>
-      <li>12: 手環</li>
-      <li>13: 耳環</li>
-      <li>14: 衛生紙</li>
-      <li>15: 錢包</li>
-      <li>16: 眼鏡</li>
-      <li>17: 戒指</li>
-      <li>18: 麥克筆</li>
+      <li>1.撲克牌</li>
+      <li>2.橡皮筋</li>
+      <li>3.信用卡</li>
+      <li>4.耳機</li>
+      <li>5.筆記本</li>
+      <li>6.便利貼</li>
+      <li>7.口罩</li>
+      <li>8.鑰匙</li>
+      <li>9.手機</li>
+      <li>10.水壺</li>
+      <li>11.手錶</li>
+      <li>12.手環</li>
+      <li>13.耳環</li>
+      <li>14.衛生紙</li>
+      <li>15.錢包</li>
+      <li>16.眼鏡</li>
+      <li>17.戒指</li>
+      <li>18.麥克筆</li>
     </ul>
   </div>
 </div>
@@ -163,7 +175,7 @@ function convertItem() {
   // 判斷輸入是否合法
   if (numberInput >= 1 && numberInput <= itemList.length) {
     // 將對應的物品替換為"項鍊"
-    itemList[numberInput - 1].textContent = numberInput + ": 項鍊";
+    itemList[numberInput - 1].textContent = numberInput + ".項鍊";
     // 顯示第二部分
     document.getElementById("inputSection").style.display = "none";
     document.getElementById("outputSection").style.display = "block";
