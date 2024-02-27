@@ -11,20 +11,24 @@
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: #f2f2f2;
   }
   
   #container {
-    max-width: 100%;
+    max-width: 800px;
     margin: 20px auto;
     padding: 20px;
     background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   }
 
   #inputSection {
     text-align: center;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f8f8f8;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
 
   #numberInput {
@@ -57,6 +61,10 @@
   #outputSection {
     display: none;
     margin-top: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f8f8f8;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
 
   #itemList {
@@ -70,34 +78,36 @@
   }
 
   #itemListTitle {
-    font-size: 36px;
+    font-size: 32px;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     text-align: center;
   }
 
   .buttonContainer {
-    margin-top: 10px;
+    margin-top: 20px;
+    text-align: center;
   }
 
   .buttonContainer button {
-    width: 120px;
-    height: 40px;
+    width: 140px;
+    height: 50px;
     font-size: 18px;
     margin: 5px;
     border: none;
-    border-radius: 4px;
+    border-radius: 25px;
     cursor: pointer;
     outline: none;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
   }
 
   #resetButton {
-    background-color: #27ae60; /* 修改颜色 */
+    background-color: #3498db;
     color: #fff;
   }
 
   #resetButton:hover {
-    background-color: #219d54; /* 修改颜色 */
+    background-color: #2980b9;
   }
 
   #convertButton {
@@ -107,6 +117,18 @@
 
   #convertButton:hover {
     background-color: #219d54;
+  }
+
+  /* 装饰性背景图案 */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"%3E%3Cg fill="%23c0c0c0" fill-opacity="0.1"%3E%3Cpath d="M40 20c0 11.046-8.954 20-20 20S0 31.046 0 20 8.954 0 20 0s20 8.954 20 20zm-4.945-3.45c-.032.13-.055.262-.088.392-1.445 5.994-6.585 10.683-12.758 11.486-.634.078-1.255.123-1.872.176-1.108.087-2.203.144-3.293.144-1.082 0-2.167-.057-3.24-.126-.646-.038-1.288-.088-1.927-.163-6.18-.846-11.3-5.454-12.73-11.463-.03-.126-.062-.251-.09-.378A15.925 15.925 0 0 0 0 20c0 8.837 7.163 16 16 16s16-7.163 16-16c0-.638-.037-1.273-.074-1.902z"%3E%3C/path%3E%3C/g%3E%3C/svg%3E');
+    z-index: -1;
   }
 </style>
 </head>
@@ -137,24 +159,24 @@
   <div id="outputSection">
     <h2 id="itemListTitle">物品列表</h2>
     <ul id="itemList">
-      <li>1.撲克牌</li>
-      <li>2.橡皮筋</li>
-      <li>3.信用卡</li>
-      <li>4.耳機</li>
-      <li>5.筆記本</li>
-      <li>6.便利貼</li>
-      <li>7.口罩</li>
-      <li>8.鑰匙</li>
-      <li>9.手機</li>
-      <li>10.水壺</li>
-      <li>11.手錶</li>
-      <li>12.手環</li>
-      <li>13.耳環</li>
-      <li>14.衛生紙</li>
-      <li>15.錢包</li>
-      <li>16.眼鏡</li>
-      <li>17.戒指</li>
-      <li>18.麥克筆</li>
+      <li>1: 撲克牌</li>
+      <li>2: 橡皮筋</li>
+      <li>3: 信用卡</li>
+      <li>4: 耳機</li>
+      <li>5: 筆記本</li>
+      <li>6: 便利貼</li>
+      <li>7: 口罩</li>
+      <li>8: 鑰匙</li>
+      <li>9: 手機</li>
+      <li>10: 水壺</li>
+      <li>11: 手錶</li>
+      <li>12: 手環</li>
+      <li>13: 耳環</li>
+      <li>14: 衛生紙</li>
+      <li>15: 錢包</li>
+      <li>16: 眼鏡</li>
+      <li>17: 戒指</li>
+      <li>18: 麥克筆</li>
     </ul>
   </div>
 </div>
@@ -175,7 +197,7 @@ function convertItem() {
   // 判斷輸入是否合法
   if (numberInput >= 1 && numberInput <= itemList.length) {
     // 將對應的物品替換為"項鍊"
-    itemList[numberInput - 1].textContent = numberInput + ".項鍊";
+    itemList[numberInput - 1].textContent = numberInput + ": 項鍊";
     // 顯示第二部分
     document.getElementById("inputSection").style.display = "none";
     document.getElementById("outputSection").style.display = "block";
