@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<title>物品列表</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+  }
+  
+  #container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+
+  #inputSection {
+    text-align: center;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f8f8f8;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  #numberInput {
+    width: 200px;
+    height: 40px;
+    font-size: 18px;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+  }
+
+  .numberButton {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    margin: 5px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .numberButton:hover {
+    background-color: #2980b9;
+  }
+
+  #outputSection {
+    display: none;
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f8f8f8;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  #itemList {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  #itemList li {
+    font-size: 18px; /* 放大文字 */
+    margin-bottom: 5px;
+  }
+
+  #itemListTitle {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .buttonContainer {
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .buttonContainer button {
+    width: 140px;
+    height: 50px;
+    font-size: 18px;
+    margin: 5px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    outline: none;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  #resetButton {
+    background-color: #3498db;
+    color: #fff;
+  }
+
+  #resetButton:hover {
+    background-color: #2980b9;
+  }
+
+  #convertButton {
+    background-color: #27ae60;
+    color: #fff;
+  }
+
+  #convertButton:hover {
+    background-color: #219d54;
+  }
+
+  /* 装饰性背景图案 */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"%3E%3Cg fill="%23c0c0c0" fill-opacity="0.1"%3E%3Cpath d="M40 20c0 11.046-8.954 20-20 20S0 31.046 0 20 8.954 0 20 0s20 8.954 20 20zm-4.945-3.45c-.032.13-.055.262-.088.392-1.445 5.994-6.585 10.683-12.758 11.486-.634.078-1.255.123-1.872.176-1.108.087-2.203.144-3.293.144-1.082 0-2.167-.057-3.24-.126-.646-.038-1.288-.088-1.927-.163-6.18-.846-11.3-5.454-12.73-11.463-.03-.126-.062-.251-.09-.378A15.925 15.925 0 0 0 0 20c0 8.837 7.163 16 16 16s16-7.163 16-16c0-.638-.037-1.273-.074-1.902z"%3E%3C/path%3E%3C/g%3E%3C/svg%3E');
+    z-index: -1;
+  }
+</style>
+</head>
+<body>
+
+<div id="container">
+  <div id="inputSection">
+    <h2>請輸入密碼</h2>
+    <input type="tel" id="numberInput" placeholder="請輸入數字（0-9）">
+    <br>
+    <button class="numberButton" onclick="addNumber(1)">1</button>
+    <button class="numberButton" onclick="addNumber(2)">2</button>
+    <button class="numberButton" onclick="addNumber(3)">3</button>
+    <button class="numberButton" onclick="addNumber(4)">4</button>
+    <button class="numberButton" onclick="addNumber(5)">5</button>
+    <br>
+    <button class="numberButton" onclick="addNumber(6)">6</button>
+    <button class="numberButton" onclick="addNumber(7)">7</button>
+    <button class="numberButton" onclick="addNumber(8)">8</button>
+    <button class="numberButton" onclick="addNumber(9)">9</button>
+    <button class="numberButton" onclick="addNumber(0)">0</button>
+    <br>
+    <div class="buttonContainer">
+      <button id="resetButton" onclick="resetInput()">重新輸入</button>
+      <button id="convertButton" onclick="convertItem()">進入列表</button>
+    </div>
+  </div>
+
+  <div id="outputSection">
+    <h2 id="itemListTitle">物品列表</h2>
+    <ul id="itemList">
+      <li>1.撲克牌</li>
+      <li>2.橡皮筋</li>
+      <li>3.信用卡</li>
+      <li>4.耳機</li>
+      <li>5.筆記本</li>
+      <li>6.便利貼</li>
+      <li>7.口罩</li>
+      <li>8.鑰匙</li>
+      <li>9.手機</li>
+      <li>10.水壺</li>
+      <li>11.手錶</li>
+      <li>12.手環</li>
+      <li>13.耳環</li>
+      <li>14.衛生紙</li>
+      <li>15.錢包</li>
+      <li>16.眼鏡</li>
+      <li>17.戒指</li>
+      <li>18.麥克筆</li>
+      <li>19.背包</li>
+      <li>20.太陽眼鏡</li>
+      <li>21.衣服</li>
+      <li>22.保溫杯</li>
+      <li>23.茶壺</li>
+      <li>24.酒精</li>
+      <li>25.麵包</li>
+      <li>26.除溼機</li>
+      <li>27.電視</li>
+      <li>28.維他命</li>
+      <li>29.籃球</li>
+      <li>30.巧克力</li>
+      <li>31.藍莓</li>
+      <li>32.蘋果</li>
+      <li>33.香蕉</li>
+      <li>34.芭樂</li>
+      <li>35.鳳梨</li>
+      <li>36.草莓</li>
+      <li>37.書本</li>
+      <li>38.窗戶</li>
+      <li>39.窗簾</li>
+      <li>40.耳塞</li>
+      <li>41.泳衣</li>
+      <li>42.泳帽</li>
+      <li>43.泳褲</li>
+      <li>44.遙控器</li>
+      <li>45.紙箱</li>
+      <li>46.冷氣</li>
+      <li>47.濕紙巾</li>
+      <li>48.暖暖包</li>
+      <li>49.相機</li>
+      <li>50.名片</li>
+      <li>51.手機殼</li>
+      <li>52.毛巾</li>
+      <li>53.牙刷</li>
+      <li>54.洗衣機</li>
+      <li>55.洗衣籃</li>
+      <li>56.洗衣球</li>
+      <li>57.洗衣精</li>
+      <li>58.熨斗</li>
+      <li>59.音響</li>
+      <li>60.沙發</li>
+      <li>61.枕頭</li>
+      <li>62.微波爐</li>
+      <li>63.電池爐</li>
+      <li>64.電鍋</li>
+      <li>65.螺絲</li>
+      <li>66.螺絲起子</li>
+      <li>67.保鮮盒</li>
+      <li>68.隨身碟</li>
+      <li>69.相機</li>
+      <li>70.衣架</li>
+      <li>71.梳子</li>
+      <li>72.塑膠袋</li>
+      <li>73.保鮮膜</li>
+      <li>74.蠟燭</li>
+      <li>75.蛋糕</li>
+      <li>76.奶油</li>
+      <li>77.雞蛋</li>
+      <li>78.鴨蛋</li>
+      <li>79.皮鞋</li>
+      <li>80.螢幕</li>
+      <li>81.床單</li>
+      <li>82.保潔墊</li>
+      <li>83.拼圖</li>
+      <li>84.麥克風</li>
+      <li>85.黑板</li>
+      <li>86.粉筆</li>
+      <li>87.公仔</li>
+      <li>88.盒玩</li>
+      <li>89.扭蛋</li>
+      <li>90.護手霜</li>
+      <li>91.地毯</li>
+      <li>92.吉他</li>
+      <li>93.鋼琴</li>
+      <li>94.牛排</li>
+      <li>95.炒麵</li>
+      <li>96.炒飯</li>
+      <li>97.行李箱</li>
+      <li>98.水管</li>
+      <li>99.醬油</li>
+      <li>100.領帶</li>
+    </ul>
+  </div>
+</div>
+
+<script>
+function addNumber(num) {
+  document.getElementById("numberInput").value += num;
+}
+
+function resetInput() {
+  document.getElementById("numberInput").value = "";
+}
+
+function convertItem() {
+  var numberInput = document.getElementById("numberInput").value;
+  var itemList = document.getElementById("itemList").getElementsByTagName("li");
+  
+  // 判斷輸入是否合法
+  if (numberInput >= 1 && numberInput <= itemList.length) {
+    // 將對應的物品替換為"項鍊"
+    itemList[numberInput - 1].textContent = numberInput + ".項鍊";
+    // 顯示第二部分
+    document.getElementById("inputSection").style.display = "none";
+    document.getElementById("outputSection").style.display = "block";
+  } else {
+    alert("請輸入有效的數字(1-100)");
+  }
+}
+
+	// 阻止 F12 開發者工具
+	document.addEventListener("keydown", function (e) {
+  	  if (e.keyCode == 123) {
+       	  e.preventDefault();
+          alert("此網頁禁止使用F12");
+        	}
+   	 });
+
+	// 禁用右鍵點擊
+	document.addEventListener("contextmenu", function (e) {
+          e.preventDefault();
+          alert("此網頁禁止使用右鍵");
+    		});
+
+	// 禁用 Ctrl+U 組合鍵
+	document.addEventListener("keydown", function (e) {
+    	if (e.ctrlKey && e.key === "u") {
+          e.preventDefault();
+          alert("此網頁禁止使用Ctrl+U 組合鍵");
+        	}
+    	});
+	// 禁用 Ctrl+U 組合鍵
+	document.addEventListener("keydown", function (e) {
+    	if (e.ctrlKey && e.key === "U") {
+          e.preventDefault();
+          alert("此網頁禁止使用Ctrl+U 組合鍵");
+        	}
+    	});
+</script>
+
+</body>
+</html>
